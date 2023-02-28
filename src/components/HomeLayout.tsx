@@ -69,7 +69,13 @@ function HomeLayout() {
     <div>
       <div className="input-group mb-3" style={{ padding: "10px 0 0 10px" }}>
         <div className="input-group-prepend">
-          <select name="" id="" onClick={(e) => setFilterParam(e.target.value)}>
+          <select
+            name=""
+            id=""
+            onClick={(e) =>
+              setFilterParam((e.target as HTMLSelectElement).value)
+            }
+          >
             <option value="title">name</option>
             <option value="episode_id">episode</option>
             <option value="release_date">date</option>
