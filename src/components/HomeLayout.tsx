@@ -4,23 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddMovie } from "./HomeReducer";
 
 function HomeLayout() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<any[]>([]);
   const [filter, setFilter] = useState<string>("");
 
-  const { selectedMovie, isFetching } = useSelector((state) => state.movies);
+  const { selectedMovie, isFetching } = useSelector(
+    (state: any) => state.movies
+  );
   const dispatch = useDispatch();
 
-  const handleOnclick = (item: Event) => {
+  const handleOnclick = (item: any) => {
     dispatch(AddMovie(item));
   };
 
   useEffect(() => {
     axios
-      .get("https://swapi.dev/api/films/?format=json")
+      .get<any>("https://swapi.dev/api/films/?format=json")
       .then((data) => setMovies(data.data.results));
   }, []);
 
-  const [filterParam, setFilterParam] = useState([]);
+  const [filterParam, setFilterParam] = useState<string>("title");
 
   const filteredFilms = movies.filter((film) => {
     if (filterParam === "title") {
@@ -36,7 +38,7 @@ function HomeLayout() {
     return film.title.toLowerCase().includes(filter.toLowerCase());
   });
 
-  function convertToRomanNumeral(episodeNumber: Event) {
+  function convertToRomanNumeral(episodeNumber: number): string {
     const romanNumerals = [
       { value: 1000, numeral: "M" },
       { value: 900, numeral: "CM" },
@@ -53,10 +55,8 @@ function HomeLayout() {
       { value: 1, numeral: "I" },
     ];
 
-    let romanNumeral: String = "";
-
+    let romanNumeral = "";
     for (let i = 0; i < romanNumerals.length; i++) {
-      let episodeNumber: Number = 0;
       while (episodeNumber >= romanNumerals[i].value) {
         romanNumeral += romanNumerals[i].numeral;
         episodeNumber -= romanNumerals[i].value;
