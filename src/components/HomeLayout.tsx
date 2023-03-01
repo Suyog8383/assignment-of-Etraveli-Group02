@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddMovie } from "./HomeReducer";
 
 function HomeLayout() {
-  const [movies, setMovies] = useState<any[]>([]);
+  const [movies, setMovies] = useState<any[]>([1]);
   const [filter, setFilter] = useState<string>("");
 
   const { selectedMovie, isFetching } = useSelector(
